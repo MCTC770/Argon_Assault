@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4421079096903386}
   - component: {fileID: 33426301592466190}
   - component: {fileID: 23100559375656226}
-  - component: {fileID: 65406553070529116}
   - component: {fileID: 114971218569608050}
   - component: {fileID: 198861785200323228}
   - component: {fileID: 199161922129909502}
@@ -41,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 1454949299546472}
   m_LocalRotation: {x: -0, y: -0.7530782, z: -0, w: 0.6579311}
   m_LocalPosition: {x: 0.044, y: 7.246, z: -0.324}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -87,18 +86,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1454949299546472}
   m_Mesh: {fileID: 4300000, guid: ec2ed6fafcc53c64ba923b9ef7d5749f, type: 3}
---- !u!65 &65406553070529116
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1454949299546472}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6604988, y: 0.12685722, z: 0.5375033}
-  m_Center: {x: 0, y: 0.000000007450581, z: 0.00000011920929}
 --- !u!82 &82246383632734098
 AudioSource:
   m_ObjectHideFlags: 1
@@ -190,10 +177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90a8969c65246746a8ccd0a0187c5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyExplosion: {fileID: 0}
-  enemyExplosionSound: {fileID: 0}
-  enemyBody: {fileID: 0}
-  enemyCollider: {fileID: 0}
+  deathFX: {fileID: 1604240708514466, guid: c2b3cf9fef4e0bf408631c3d8b6a7ec4, type: 2}
+  spawnAtRuntime: {fileID: 0}
 --- !u!198 &198861785200323228
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -254,7 +239,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 358292953
+  randomSeed: 671707234
   InitialModule:
     serializedVersion: 3
     enabled: 1
