@@ -227,6 +227,10 @@ Prefab:
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1375072243675604, guid: fe80c8c6fba8894438c4d2713f232f8e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fe80c8c6fba8894438c4d2713f232f8e, type: 2}
   m_IsPrefabParent: 0
@@ -304,8 +308,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 266641525}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.091752, y: 64.51018, z: 292.29404}
+  m_LocalRotation: {x: 0.05448224, y: 0.5681037, z: -0.03772946, w: 0.82028437}
+  m_LocalPosition: {x: 46.359077, y: 25.55741, z: 569.5902}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400805574}
@@ -433,6 +437,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c83f92c45b3a048873c8df74e365e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathFX: {fileID: 2099247822}
+  reloadSceneDelay: 1
 --- !u!1001 &437646571
 Prefab:
   m_ObjectHideFlags: 0
@@ -1246,3 +1252,8 @@ Transform:
   m_PrefabParentObject: {fileID: 4474250445052716, guid: cd677f6cd8013e24eb915607793f2b75,
     type: 2}
   m_PrefabInternal: {fileID: 1104323677}
+--- !u!1 &2099247822 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1375072243675604, guid: fe80c8c6fba8894438c4d2713f232f8e,
+    type: 2}
+  m_PrefabInternal: {fileID: 227055539}

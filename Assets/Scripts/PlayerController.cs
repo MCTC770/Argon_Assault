@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour {
 		ProcessRotation();
 	}
 
-	public void OnPlayerDeath()
+	void OnPlayerDeath()
 	{
 		controlEnabled = false;
 	}
