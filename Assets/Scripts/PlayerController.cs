@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+
 public class PlayerController : MonoBehaviour {
 
 	[Header("Movement")]
@@ -18,6 +19,12 @@ public class PlayerController : MonoBehaviour {
 	[Tooltip("Adjust y rotation based on x position")] [SerializeField] float positionYawFactor = 4.5f;
 	[Tooltip("Adjust z tilt while moving left or right")] [SerializeField] float controlRollFactor = -30f;
 
+	[Header("Guns")]
+	[SerializeField] GameObject[] guns;
+	[SerializeField] ParticleSystem gunParticleLeft;
+	[SerializeField] ParticleSystem gunParticleRight;
+	[SerializeField] float emissionOverTime = 5f;
+
 	ScoreBoard scoreBoard;
 
 	float xThrow;
@@ -28,13 +35,19 @@ public class PlayerController : MonoBehaviour {
 	{
 		Application.targetFrameRate = 30;
 	}
-	
+
+	private void Start()
+	{
+		//gunParticle = GetComponent<ParticleSystem>();
+		scoreBoard = FindObjectOfType<ScoreBoard>();
+	}
+
 	// Update is called once per frame
 	void Update ()
 	{
-		scoreBoard = FindObjectOfType<ScoreBoard>();
 		RespondToXAxisInput();
 		RespondToYAxisInput();
+		RespondToFireInput();
 		ProcessRotation();
 		RespondToFireInput();
 		AddTimebaseScore();
@@ -73,6 +86,23 @@ public class PlayerController : MonoBehaviour {
 		float clampedYPos = Mathf.Clamp(rawYPos, yMin, yMax);
 
 		transform.localPosition = new Vector3(transform.localPosition.x, clampedYPos, transform.localPosition.z);
+	}
+
+	private void RespondToFireInput()
+	{
+		var emissionGunLeft = gunParticleLeft.emission;
+		var emissionGunRight = gunParticleRight.emission;
+
+		if (CrossPlatformInputManager.GetButton("Fire"))
+		{
+			emissionGunLeft.rateOverTime = emissionOverTime;
+			emissionGunRight.rateOverTime = emissionOverTime;
+		}
+		else
+		{
+			emissionGunLeft.rateOverTime = 0f;
+			emissionGunRight.rateOverTime = 0f;
+		}
 	}
 
 	void ProcessRotation()
