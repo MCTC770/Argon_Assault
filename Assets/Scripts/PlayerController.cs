@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+
 public class PlayerController : MonoBehaviour {
 
 	[Header("Movement")]
@@ -10,6 +11,9 @@ public class PlayerController : MonoBehaviour {
 	[Tooltip("Defines x boundaries within the ship can move in m")][SerializeField] float xRange = 4.95f;
 	[Tooltip("Defines lower y boundaries within the ship can move in m")] [SerializeField] float yMin = -3.5f;
 	[Tooltip("Defines upper y boundaries within the ship can move in m")] [SerializeField] float yMax = 3.6f;
+	[SerializeField] GameObject[] guns;
+	[SerializeField] ParticleSystem gunParticleLeft;
+	[SerializeField] ParticleSystem gunParticleRight;
 
 	[Header("Rotations")]
 	[Tooltip("Adjusts the x rotation of the spaceship based on y position")][SerializeField] float positionPitchFactor = -5f;
@@ -27,14 +31,22 @@ public class PlayerController : MonoBehaviour {
 	{
 		Application.targetFrameRate = 30;
 	}
-	
+
+	private void Start()
+	{
+		//gunParticle = GetComponent<ParticleSystem>();
+		scoreBoard = FindObjectOfType<ScoreBoard>();
+	}
+
 	// Update is called once per frame
 	void Update ()
 	{
-		scoreBoard = FindObjectOfType<ScoreBoard>();
+		var mainBulletsLeft = gunParticleLeft.main;
+		var mainBulletsRight = gunParticleRight.main;
 		RespondToXAxisInput();
 		RespondToYAxisInput();
 		ProcessRotation();
+		ProcessFiring();
 		AddTimebaseScore();
 	}
 
@@ -85,5 +97,33 @@ public class PlayerController : MonoBehaviour {
 	void AddTimebaseScore()
 	{
 		scoreBoard.TimeBasedScore();
+	}
+
+	void ProcessFiring()
+	{
+		if(CrossPlatformInputManager.GetButton("Fire"))
+		{
+			ActivateGuns();
+		}
+		else
+		{
+			DeactivateGuns();
+		}
+	}
+
+	private void ActivateGuns()
+	{
+		foreach (GameObject gun in guns)
+		{
+			mainBulletsLeft.loop = true;
+		}
+	}
+
+	private void DeactivateGuns()
+	{
+		foreach (GameObject gun in guns)
+		{
+			mainBulletsRight.loop = false;
+		}
 	}
 }

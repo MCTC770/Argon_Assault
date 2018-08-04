@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 198769799842337712}
   - component: {fileID: 199307260534579628}
   m_Layer: 0
-  m_Name: Bullet left
+  m_Name: Gun left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 198661903437951408}
   - component: {fileID: 199033846527794842}
   m_Layer: 0
-  m_Name: Bullet right
+  m_Name: Gun right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,6 +302,10 @@ MonoBehaviour:
   xRange: 4.95
   yMin: -3.5
   yMax: 3.6
+  guns:
+  - {fileID: 1987619850515336}
+  - {fileID: 1305004159358768}
+  gunParticle: []
   positionPitchFactor: -5
   controlPitchFactor: -15
   positionYawFactor: 6.5
@@ -319,6 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathFX: {fileID: 1139791514101710}
   reloadSceneDelay: 1
+  playerShipMesh: {fileID: 23342356301671562}
 --- !u!198 &198661903437951408
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -379,7 +384,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 796201737
+  randomSeed: -1505212929
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3696,7 +3701,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1754217121
+  randomSeed: -2050397722
   InitialModule:
     serializedVersion: 3
     enabled: 1
