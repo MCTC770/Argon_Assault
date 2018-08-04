@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour {
 	[Tooltip("Adjust y rotation based on x position")] [SerializeField] float positionYawFactor = 4.5f;
 	[Tooltip("Adjust z tilt while moving left or right")] [SerializeField] float controlRollFactor = -30f;
 
+	ScoreBoard scoreBoard;
+
 	float xThrow;
 	float yThrow;
 	bool controlEnabled = true;
@@ -29,9 +31,11 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+		scoreBoard = FindObjectOfType<ScoreBoard>();
 		RespondToXAxisInput();
 		RespondToYAxisInput();
 		ProcessRotation();
+		AddTimebaseScore();
 	}
 
 	void OnPlayerDeath()
@@ -76,5 +80,10 @@ public class PlayerController : MonoBehaviour {
 		float roll = xThrow * controlRollFactor;
 
 		transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
+	}
+
+	void AddTimebaseScore()
+	{
+		scoreBoard.TimeBasedScore();
 	}
 }

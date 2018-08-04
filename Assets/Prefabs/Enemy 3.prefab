@@ -179,6 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathFX: {fileID: 1604240708514466, guid: c2b3cf9fef4e0bf408631c3d8b6a7ec4, type: 2}
   spawnAtRuntime: {fileID: 0}
+  scorePerHit: 500
 --- !u!198 &198861785200323228
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -239,7 +240,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 671707234
+  randomSeed: 254739309
   InitialModule:
     serializedVersion: 3
     enabled: 1
