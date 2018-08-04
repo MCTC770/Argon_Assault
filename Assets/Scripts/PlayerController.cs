@@ -11,15 +11,18 @@ public class PlayerController : MonoBehaviour {
 	[Tooltip("Defines x boundaries within the ship can move in m")][SerializeField] float xRange = 4.95f;
 	[Tooltip("Defines lower y boundaries within the ship can move in m")] [SerializeField] float yMin = -3.5f;
 	[Tooltip("Defines upper y boundaries within the ship can move in m")] [SerializeField] float yMax = 3.6f;
-	[SerializeField] GameObject[] guns;
-	[SerializeField] ParticleSystem gunParticleLeft;
-	[SerializeField] ParticleSystem gunParticleRight;
 
 	[Header("Rotations")]
 	[Tooltip("Adjusts the x rotation of the spaceship based on y position")][SerializeField] float positionPitchFactor = -5f;
 	[Tooltip("Adjust y tilt while moving up or down")][SerializeField] float controlPitchFactor = -15f;
 	[Tooltip("Adjust y rotation based on x position")] [SerializeField] float positionYawFactor = 4.5f;
 	[Tooltip("Adjust z tilt while moving left or right")] [SerializeField] float controlRollFactor = -30f;
+
+	[Header("Guns")]
+	[SerializeField] GameObject[] guns;
+	[SerializeField] ParticleSystem gunParticleLeft;
+	[SerializeField] ParticleSystem gunParticleRight;
+	[SerializeField] float emissionOverTime = 5f;
 
 	ScoreBoard scoreBoard;
 
@@ -41,12 +44,10 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		var mainBulletsLeft = gunParticleLeft.main;
-		var mainBulletsRight = gunParticleRight.main;
 		RespondToXAxisInput();
 		RespondToYAxisInput();
+		RespondToFireInput();
 		ProcessRotation();
-		ProcessFiring();
 		AddTimebaseScore();
 	}
 
@@ -85,6 +86,23 @@ public class PlayerController : MonoBehaviour {
 		transform.localPosition = new Vector3(transform.localPosition.x, clampedYPos, transform.localPosition.z);
 	}
 
+	private void RespondToFireInput()
+	{
+		var emissionGunLeft = gunParticleLeft.emission;
+		var emissionGunRight = gunParticleRight.emission;
+
+		if (CrossPlatformInputManager.GetButton("Fire"))
+		{
+			emissionGunLeft.rateOverTime = emissionOverTime;
+			emissionGunRight.rateOverTime = emissionOverTime;
+		}
+		else
+		{
+			emissionGunLeft.rateOverTime = 0f;
+			emissionGunRight.rateOverTime = 0f;
+		}
+	}
+
 	void ProcessRotation()
 	{
 		float pitch = transform.localPosition.y * positionPitchFactor + yThrow * controlPitchFactor;
@@ -97,33 +115,5 @@ public class PlayerController : MonoBehaviour {
 	void AddTimebaseScore()
 	{
 		scoreBoard.TimeBasedScore();
-	}
-
-	void ProcessFiring()
-	{
-		if(CrossPlatformInputManager.GetButton("Fire"))
-		{
-			ActivateGuns();
-		}
-		else
-		{
-			DeactivateGuns();
-		}
-	}
-
-	private void ActivateGuns()
-	{
-		foreach (GameObject gun in guns)
-		{
-			mainBulletsLeft.loop = true;
-		}
-	}
-
-	private void DeactivateGuns()
-	{
-		foreach (GameObject gun in guns)
-		{
-			mainBulletsRight.loop = false;
-		}
 	}
 }
