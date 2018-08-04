@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour {
 	[Tooltip("Defines x boundaries within the ship can move in m")][SerializeField] float xRange = 4.95f;
 	[Tooltip("Defines lower y boundaries within the ship can move in m")] [SerializeField] float yMin = -3.5f;
 	[Tooltip("Defines upper y boundaries within the ship can move in m")] [SerializeField] float yMax = 3.6f;
-	[SerializeField] GameObject[] bullets;
 
 	[Header("Rotations")]
 	[Tooltip("Adjusts the x rotation of the spaceship based on y position")][SerializeField] float positionPitchFactor = -5f;
@@ -19,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 	[Tooltip("Adjust y rotation based on x position")] [SerializeField] float positionYawFactor = 4.5f;
 	[Tooltip("Adjust z tilt while moving left or right")] [SerializeField] float controlRollFactor = -30f;
 
-	[Header("Guns")]
+	[Header("Shooting")]
 	[SerializeField] GameObject[] guns;
 	[SerializeField] ParticleSystem gunParticleLeft;
 	[SerializeField] ParticleSystem gunParticleRight;
@@ -38,7 +37,6 @@ public class PlayerController : MonoBehaviour {
 
 	private void Start()
 	{
-		//gunParticle = GetComponent<ParticleSystem>();
 		scoreBoard = FindObjectOfType<ScoreBoard>();
 	}
 
@@ -49,13 +47,16 @@ public class PlayerController : MonoBehaviour {
 		RespondToYAxisInput();
 		RespondToFireInput();
 		ProcessRotation();
-		RespondToFireInput();
 		AddTimebaseScore();
 	}
 
 	void OnPlayerDeath()
 	{
 		controlEnabled = false;
+		foreach (GameObject gun in guns)
+		{
+			gun.SetActive(false);
+		}
 	}
 
 	void RespondToXAxisInput()
@@ -117,23 +118,5 @@ public class PlayerController : MonoBehaviour {
 	void AddTimebaseScore()
 	{
 		scoreBoard.TimeBasedScore();
-	}
-
-	private void RespondToFireInput()
-	{
-		if (CrossPlatformInputManager.GetButton("Fire"))
-		{
-			foreach (GameObject bullet in bullets)
-			{
-				bullet.SetActive(true);
-			}
-		}
-		else
-		{
-			foreach (GameObject bullet in bullets)
-			{
-				bullet.SetActive(false);
-			}
-		}
 	}
 }

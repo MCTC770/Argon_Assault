@@ -95,7 +95,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4955468464998770}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4138307570932694
 Transform:
@@ -108,7 +108,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4955468464998770}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4545671248825462
 Transform:
@@ -133,8 +133,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -1.5, z: 7.700012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4100173639264378}
   - {fileID: 4138307570932694}
+  - {fileID: 4100173639264378}
   - {fileID: 4545671248825462}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -302,14 +302,16 @@ MonoBehaviour:
   xRange: 4.95
   yMin: -3.5
   yMax: 3.6
-  guns:
-  - {fileID: 1987619850515336}
-  - {fileID: 1305004159358768}
-  gunParticle: []
   positionPitchFactor: -5
   controlPitchFactor: -15
   positionYawFactor: 6.5
   controlRollFactor: -30
+  guns:
+  - {fileID: 1305004159358768}
+  - {fileID: 1987619850515336}
+  gunParticleLeft: {fileID: 198769799842337712}
+  gunParticleRight: {fileID: 198661903437951408}
+  emissionOverTime: 5
 --- !u!114 &114798675241381074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -384,7 +386,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1505212929
+  randomSeed: 1874542323
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3701,7 +3703,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2050397722
+  randomSeed: -1181679969
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4261,7 +4263,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
