@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
 	[Tooltip("Defines x boundaries within the ship can move in m")][SerializeField] float xRange = 4.95f;
 	[Tooltip("Defines lower y boundaries within the ship can move in m")] [SerializeField] float yMin = -3.5f;
 	[Tooltip("Defines upper y boundaries within the ship can move in m")] [SerializeField] float yMax = 3.6f;
+	[SerializeField] GameObject[] bullets;
 
 	[Header("Rotations")]
 	[Tooltip("Adjusts the x rotation of the spaceship based on y position")][SerializeField] float positionPitchFactor = -5f;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour {
 		RespondToXAxisInput();
 		RespondToYAxisInput();
 		ProcessRotation();
+		RespondToFireInput();
 		AddTimebaseScore();
 	}
 
@@ -85,5 +87,23 @@ public class PlayerController : MonoBehaviour {
 	void AddTimebaseScore()
 	{
 		scoreBoard.TimeBasedScore();
+	}
+
+	private void RespondToFireInput()
+	{
+		if (CrossPlatformInputManager.GetButton("Fire"))
+		{
+			foreach (GameObject bullet in bullets)
+			{
+				bullet.SetActive(true);
+			}
+		}
+		else
+		{
+			foreach (GameObject bullet in bullets)
+			{
+				bullet.SetActive(false);
+			}
+		}
 	}
 }
